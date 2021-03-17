@@ -91,7 +91,6 @@ uint64_t generate_xxh(const char *filename) {
 /* Iterate over the source files and generate the hash. Once completed,
  * data is copied from the source file queue to the cp hashed file structure
  * which includes the files digest.
- * TODO: Fix this...
  */
 
 int process_xxh(copy_handler *copy_job) {
@@ -109,6 +108,22 @@ int process_xxh(copy_handler *copy_job) {
         g_array_append_val(copy_job->hashed_file_paths, processed_file);
         src = g_queue_pop_head(copy_job->source_files->src_list);
     }
+    return 0;
+}
+
+/* Reads the processed file array and copies each file to the array of destinations.
+ * Directories are created inline.
+ */
+
+int process_copy(copy_handler *copy_job) {
+    return 0;
+}
+
+/* Loops through each destination and generates a new set of hashes.
+ * Hashes are checked against the source hashes stored in our hashed_file_paths structure.
+ */
+
+int verify(copy_handler *copy_job) {
     return 0;
 }
 

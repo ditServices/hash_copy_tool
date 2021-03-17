@@ -29,5 +29,9 @@ int check_destinations(char **destinations, unsigned int total_size);
 
 int process_xxh(copy_handler *copy_job);
 
+int process_copy(copy_handler *copy_job);
+
+int verify(copy_handler *copy_job);
+
 void close_copy(copy_handler *copy_job);
 #endif //HASH_COPY_HANDLER_H
