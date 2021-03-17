@@ -105,7 +105,7 @@ int process_xxh(copy_handler *copy_job) {
         processed_file.filename = src->filename;
         processed_file.size = src->size;
         processed_file.hash_digest = digest;
-        printf("Processed File: %s:\t %016lx\n", processed_file.file_path, processed_file.hash_digest);
+        printf("Processed File: %s:\t %016lx\n", processed_file.file_path + processed_file.filename, processed_file.hash_digest);
         g_array_append_val(copy_job->hashed_file_paths, processed_file);
         src = g_queue_pop_head(copy_job->source_files->src_list);
     }
