@@ -130,6 +130,6 @@ int verify(copy_handler *copy_job) {
 // Clean up
 void close_copy(copy_handler *copy_job) {
     delete_handler(copy_job->source_files);
-    g_array_free(copy_job->hashed_file_paths, FALSE);
+    g_array_free(copy_job->hashed_file_paths, TRUE);
     free(copy_job);
 }

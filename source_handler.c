@@ -51,7 +51,6 @@ int process(const char *fpath, const struct stat *statptr, int flags, struct FTW
 src_handler* new_src_handler(char* src_path) {
     sh_total = 0;
     src_handler *sources = malloc(sizeof(src_handler));
-    sources->src_list = g_queue_new();
     sh_file_list = g_queue_new();
     int fd_limit = 5;
     int flags = FTW_CHDIR | FTW_DEPTH | FTW_MOUNT | FTW_PHYS;
