@@ -7,7 +7,6 @@
 
 #include <glib.h>
 #include "source_handler.h"
-
 /* Structure to hold our hashed files before copying */
 
 typedef struct cp_hashed_file {

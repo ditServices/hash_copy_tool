@@ -10,5 +10,5 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(GLIB REQUIRED IMPORTED_TARGET glib-2.0)
 pkg_check_modules(XXHASH REQUIRED IMPORTED_TARGET libxxhash)
 
-add_executable(hash main.c vprint.c vprint.h source_handler.c source_handler.h copy_handler.c copy_handler.h)
+add_executable(hash main.c vprint.c vprint.h source_handler.c source_handler.h copy_handler.c copy_handler.h verify_handler.c verify_handler.h)
 target_link_libraries(hash PUBLIC PkgConfig::GLIB PkgConfig::XXHASH)
