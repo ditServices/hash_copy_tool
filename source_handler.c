@@ -15,15 +15,15 @@ GQueue* sh_file_list;
  * global sh_file_list queue.
  */
 
-src_file* new_src_file(const char * src_filepath, off_t size, int filename) {
-    src_file *sh_src_file = malloc(sizeof(src_file));
+file* new_file(const char * src_filepath, off_t size, int filename) {
+    file *sh_src_file = malloc(sizeof(file));
     sh_src_file->file_path = g_strdup(src_filepath);
     sh_src_file->size = size;
     sh_src_file->filename = filename;
     return sh_src_file;
 }
 
-void free_file_list(src_file *src_file_to_free) {
+void free_file_list(file *src_file_to_free) {
     free((char *) src_file_to_free->file_path);
     free(src_file_to_free);
 }
@@ -35,7 +35,7 @@ void free_file_list(src_file *src_file_to_free) {
 int process(const char *fpath, const struct stat *statptr, int flags, struct FTW *pfwt) {
     if(flags == FTW_F) {
         if(strcmp(fpath + pfwt->base, ".DS_Store") != 0) {
-            src_file *sh_src_file = new_src_file(fpath, statptr->st_size, pfwt->base);
+            file *sh_src_file = new_file(fpath, statptr->st_size, pfwt->base);
             g_queue_push_tail(sh_file_list, sh_src_file);
             sh_total += sh_src_file->size;
         }
@@ -48,9 +48,9 @@ int process(const char *fpath, const struct stat *statptr, int flags, struct FTW
  * it has been copied as it is no longer needed.
  */
 
-src_handler* new_src_handler(char* src_path) {
+file_handler* new_file_handler(char* src_path) {
     sh_total = 0;
-    src_handler *sources = malloc(sizeof(src_handler));
+    file_handler *sources = malloc(sizeof(file_handler));
     sh_file_list = g_queue_new();
     int fd_limit = 5;
     int flags = FTW_CHDIR | FTW_DEPTH | FTW_MOUNT | FTW_PHYS;
@@ -61,7 +61,7 @@ src_handler* new_src_handler(char* src_path) {
 }
 
 //cleanup
-void delete_handler(src_handler *src_file_handler) {
+void delete_handler(file_handler *src_file_handler) {
     g_queue_free_full(src_file_handler->src_list, (gpointer) free_file_list);
     g_queue_free_full(sh_file_list, (gpointer) free_file_list);
     free(src_file_handler);

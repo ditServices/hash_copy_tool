@@ -30,7 +30,7 @@ int check_destinations(char **destinations, unsigned int total_size) {
 
 copy_handler* new_copy_handler(char* src_path, char **destinations) {
     copy_handler* copy_handler_init = malloc(sizeof(copy_handler));
-    copy_handler_init->source_files = new_src_handler(src_path);
+    copy_handler_init->source_files = new_file_handler(src_path);
     copy_handler_init->destinations = destinations;
     int dest_status = check_destinations(copy_handler_init->destinations, copy_handler_init->source_files->src_size);
     if(dest_status != -1) {
@@ -96,7 +96,7 @@ uint64_t generate_xxh(const char *filename) {
 int process_xxh(copy_handler *copy_job) {
     cp_hashed_file processed_file;
     int src_list_length = copy_job->source_files->src_list->length;
-    src_file *src = g_queue_pop_head(copy_job->source_files->src_list);
+    file *src = g_queue_pop_head(copy_job->source_files->src_list);
 
     for(int i = 0; i <src_list_length; i++) {
         uint64_t digest = generate_xxh(src->file_path);

@@ -17,7 +17,7 @@ typedef struct cp_hashed_file {
 } cp_hashed_file;
 
 typedef struct copy_handler {
-    src_handler *source_files;
+    file_handler *source_files;
     char **destinations;
     GArray* hashed_file_paths;
 } copy_handler;

@@ -11,26 +11,26 @@
  * Eventually this will be placed inside our src_handler queue.
  */
 
-typedef struct src_file {
+typedef struct file {
     off_t size;
     int filename;
     const char *file_path;
-} src_file;
+} file;
 
-src_file* new_src_file(const char * src_filepath, off_t size, int filename);
+file* new_file(const char * src_filepath, off_t size, int filename);
 
 /* src_handler Object acts as the base structure for the whole source directory.
  * It includes the whole directory size and a queue of
  * src_file structs to be processed
  */
 
-typedef struct src_handler {
+typedef struct file_handler {
     GQueue* src_list;
     off_t src_size;
-} src_handler;
+} file_handler;
 
-src_handler* new_src_handler(char* src_path);
+file_handler* new_file_handler(char* src_path);
 
-void delete_handler(src_handler *src_file_handler);
+void delete_handler(file_handler *src_file_handler);
 
 #endif //HASH_SOURCE_HANDLER_H
